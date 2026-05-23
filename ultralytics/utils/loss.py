@@ -187,7 +187,7 @@ class BboxLoss(nn.Module):
         )
 
         # IoU-adaptive inner ratio within that range
-        ratio_adapt = (rmin_eff + (rmax_eff - rmin_eff) * iou.detach()).clamp(rmin_eff, rmax_eff)
+        ratio_adapt = (rmax_eff - (rmax_eff - rmin_eff) * iou.detach()).clamp(rmin_eff, rmax_eff)
 
 
         ratio_adapt = ratio_adapt.unsqueeze(-1)  # (N_fg,1)
